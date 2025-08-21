@@ -70,3 +70,49 @@ func TestPlugin(t *testing.T) {
 		scenario.Test(t)
 	}
 }
+
+func TestValidation(t *testing.T) {
+	type scenario struct {
+		name      string
+		input     *Plugin
+		expectErr bool
+	}
+
+	scenarios := []scenario{
+		{
+			"empty",
+			&Plugin{},
+			false,
+		},
+		{
+			"valid",
+			&Plugin{
+				Fields: []string{
+					"collection_name.field_name",
+				},
+			},
+			false,
+		},
+		{
+			"no_period",
+			&Plugin{
+				Fields: []string{
+					"no_period",
+				},
+			},
+			true,
+		},
+	}
+
+	for _, s := range scenarios {
+		t.Run(s.name, func(t *testing.T) {
+			err := s.input.Validate()
+			if s.expectErr && err == nil {
+				t.Error("expected error and got none")
+			}
+			if !s.expectErr && err != nil {
+				t.Errorf("unexpected error: %s", err)
+			}
+		})
+	}
+}

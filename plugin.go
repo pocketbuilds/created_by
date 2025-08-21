@@ -1,8 +1,11 @@
 package created_by
 
 import (
+	"errors"
+	"regexp"
 	"strings"
 
+	validation "github.com/go-ozzo/ozzo-validation/v4"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbuilds/xpb"
 )
@@ -39,14 +42,45 @@ func (p *Plugin) Description() string {
 // Init implements xpb.Plugin.
 func (p *Plugin) Init(app core.App) error {
 	for _, raw := range p.Fields {
-		// TODO: validation update on xpb
-		// Prevalidate (interface for filling defaults programatically)
-		// validation.Validate
 		collectionName, fieldName, _ := strings.Cut(raw, ".")
 		app.OnRecordCreateRequest(collectionName).
 			BindFunc(p.setCreatedByField(fieldName))
 	}
 	return nil
+}
+
+// copied from core.collectionNameRegex
+var collectionNameRegex = regexp.MustCompile(`^\w+$`)
+
+// Validate implements validation.Validatable.
+func (p *Plugin) Validate() error {
+	return validation.ValidateStruct(p,
+		validation.Field(&p.Fields,
+			validation.Each(
+				validation.By(func(value any) error {
+					str, err := validation.EnsureString(value)
+					if err != nil {
+						return err
+					}
+					if strings.Count(str, ".") != 1 {
+						return errors.New("must contain a single period separator")
+					}
+					collectionName, fieldName, _ := strings.Cut(str, ".")
+					if err := validation.Validate(collectionName,
+						validation.Match(collectionNameRegex),
+					); err != nil {
+						return err
+					}
+					if err := validation.Validate(fieldName,
+						validation.By(core.DefaultFieldNameValidationRule),
+					); err != nil {
+						return err
+					}
+					return nil
+				}),
+			),
+		),
+	)
 }
 
 func (p *Plugin) setCreatedByField(fieldName string) func(e *core.RecordRequestEvent) error {
