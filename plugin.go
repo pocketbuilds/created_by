@@ -3,8 +3,8 @@ package created_by
 import (
 	"strings"
 
-	"github.com/PocketBuilds/xpb"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/pocketbuilds/xpb"
 )
 
 type Plugin struct {
