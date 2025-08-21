@@ -3,8 +3,8 @@ module github.com/pocketbuilds/created_by
 go 1.24.5
 
 require (
-	github.com/PocketBuilds/xpb v0.0.1
 	github.com/pocketbase/pocketbase v0.23.0
+	github.com/pocketbuilds/xpb v0.0.2-0.20250821190501-67cd05d3c02e
 )
 
 require (
@@ -39,7 +39,6 @@ require (
 	github.com/ganigeorgiev/fexpr v0.5.0 // indirect
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.1 // indirect
-	github.com/golang-jwt/jwt/v5 v5.2.3 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.14.0 // indirect
@@ -50,7 +49,6 @@ require (
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
 	github.com/ncruces/go-strftime v0.1.9 // indirect
 	github.com/pocketbase/dbx v1.11.0 // indirect
-	github.com/pocketbuilds/xpb v0.0.2-0.20250821190501-67cd05d3c02e // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec // indirect
 	github.com/spf13/cast v1.9.2 // indirect
 	github.com/spf13/cobra v1.9.1 // indirect
