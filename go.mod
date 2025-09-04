@@ -3,8 +3,9 @@ module github.com/pocketbuilds/created_by
 go 1.24.5
 
 require (
+	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
 	github.com/pocketbase/pocketbase v0.23.0
-	github.com/pocketbuilds/xpb v0.0.2-0.20250821190501-67cd05d3c02e
+	github.com/pocketbuilds/xpb v0.0.2
 )
 
 require (
@@ -37,7 +38,6 @@ require (
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
 	github.com/ganigeorgiev/fexpr v0.5.0 // indirect
-	github.com/go-ozzo/ozzo-validation/v4 v4.3.0 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.1 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/google/uuid v1.6.0 // indirect
